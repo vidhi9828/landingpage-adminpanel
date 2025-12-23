@@ -1,4 +1,5 @@
 name: nextjs build with caching and artifacts
+
 on:
   push:
     branches: [ main ]
@@ -9,25 +10,22 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v4
 
       - name: setup node js
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v4
         with:
-         node-version: 22.x
-         cache: 'npm'
+          node-version: 22
+          cache: npm
 
-     - name: install dependencies
-       run: npm install
+      - name: install dependencies
+        run: npm install
 
-     - name: build next js app
-       run: npm run build
+      - name: build next js app
+        run: npm run build
 
-     - name: upload build on artifacts
-       uses: actions/upload-artifact@v6.0.0
-       with:
-         name: nextjs-build
-         path: out/
-
-       
-      
+      - name: upload build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build
+          path: out/
